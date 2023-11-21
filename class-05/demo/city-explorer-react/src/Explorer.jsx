@@ -1,50 +1,43 @@
-import React from 'react';
+import { useState } from 'react';
 import Map from './Map';
 import Restaurants from './Restaurants';
 import location from './fake-data/location.json';
 import restaurants from './fake-data/restaurants.json';
 import map from './images/map.png';
 
-class Explorer extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      displayResults: false,
-      locationObj: location,
-      restaurants: restaurants
-    }
+function Explorer() {
+  const [displayResults, setDisplayResults] = useState(false);
+  const [locationObj, setLocationObj] = useState(location);
+  const [restaurants, setRestaurants] = useState(restaurants);
+
+  function handleLocationSearch(event) {
+    event.preventDefault();
+    setDisplayResults(true);
   }
 
-  handleLocationSearch = (e) => {
-    e.preventDefault();
-    this.setState({ displayResults: true });
-  }
+  return (
+    <div id="main">
+      <form onSubmit={handleLocationSearch} id="search-form">
+        <label>Search for a location</label>
+        <input type="text" name="search" id="input-search" placeholder="Enter a location here" />
+        <button type="submit">Explore!</button>
+      </form>
 
-  render(){
-    return(
-      <div id="main">
-        <form onSubmit={this.handleLocationSearch} id="search-form">
-          <label>Search for a location</label>
-          <input type="text" name="search" id="input-search" placeholder="Enter a location here" />
-          <button type="submit">Explore!</button>
-        </form>
+      {displayResults &&
+        <div>
+          <Map
+            location={locationObj}
+            map={map}
+          />
+          <Restaurants
+            restaurants={restaurants}
+            location={locationObj}
+          />
+        </div>
+      }
 
-        {this.state.displayResults &&
-          <div>
-            <Map
-              location={this.state.locationObj}
-              map={map}
-            />
-            <Restaurants
-              restaurants={this.state.restaurants}
-              location={this.state.locationObj}
-            />
-          </div>
-        }
-
-      </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default Explorer;

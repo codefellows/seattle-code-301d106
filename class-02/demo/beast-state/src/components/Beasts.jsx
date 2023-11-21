@@ -1,70 +1,59 @@
-import { Component } from 'react'
+import { useState } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Image from 'react-bootstrap/Image'
 
-export default class Beasts extends Component {
-  render() {
+export default function Beasts(props) {
 
-    const beastImages = this.props.imageUrls;
+  const beastImages = props.imageUrls;
 
-    return (
-      <div>
-        <h2>{this.props.message}</h2>
+  return (
+    <div>
+      <h2>{props.message}</h2>
 
-        <Container>
-          <Row>
-            <Col>
-              <BeastImage image_url={beastImages[0].image_url} />
-            </Col>
-            <Col>
-              <BeastImage image_url={beastImages[1].image_url} />
-            </Col>
-            <Col>
-              <BeastImage image_url={beastImages[2].image_url} />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <BeastImage image_url={beastImages[3].image_url} />
-            </Col>
-            <Col>
-              <BeastImage image_url={beastImages[4].image_url} />
-            </Col>
-            <Col>
-              <BeastImage image_url={beastImages[5].image_url} />
-            </Col>
-          </Row>
+      <Container>
+        <Row>
+          <Col>
+            <BeastImage image_url={beastImages[0].image_url} />
+          </Col>
+          <Col>
+            <BeastImage image_url={beastImages[1].image_url} />
+          </Col>
+          <Col>
+            <BeastImage image_url={beastImages[2].image_url} />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <BeastImage image_url={beastImages[3].image_url} />
+          </Col>
+          <Col>
+            <BeastImage image_url={beastImages[4].image_url} />
+          </Col>
+          <Col>
+            <BeastImage image_url={beastImages[5].image_url} />
+          </Col>
+        </Row>
 
-        </Container>
-      </div>
-    );
-  }
+      </Container>
+    </div>
+  );
 }
 
-class BeastImage extends Component {
 
-  constructor(props) {
-    super(constructor);
-    this.state = {
-      "status": "Yay"
-    }
+function BeastImage(props) {
+
+  const [status, setStatus] = useState("Yay");
+
+  function handleClick = () => {
+    setStatus(status === "Nay" ? "Yay" : "Nay");
   }
 
-  handleClick = () => {
-    const newStatus = this.state.status === "Nay" ? "Yay" : "Nay";
-    this.setState({
-      status: newStatus
-    });
-  }
-
-  render() {
-    return (
-      <div onClick={this.handleClick}>
-        <Image src={this.props.image_url} alt="some horned beast" rounded fluid />
-        <h3>{this.state.status}</h3>
-      </div>
-    );
-  }
+  return (
+    <div onClick={handleClick}>
+      <Image src={props.image_url} alt="some horned beast" rounded fluid />
+      <h3>{status}</h3>
+    </div>
+  );
 }

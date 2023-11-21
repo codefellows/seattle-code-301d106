@@ -1,16 +1,14 @@
-import { Component } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 
-export default class Footer extends Component {
+export default function Footer(props) {
 
-  render() {
-    return (
-      <Navbar bg="dark" variant="dark">
-        <Navbar.Brand>
-          <p>{this.props.text}</p>
-        </Navbar.Brand>
-      </Navbar>
+  return (
+    <Navbar bg="dark" variant="dark">
+      <Navbar.Brand>
+        <p>{props.text}</p>
+      </Navbar.Brand>
+    </Navbar>
 
-    );
-  }
+  );
 }
+

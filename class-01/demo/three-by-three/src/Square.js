@@ -1,8 +1,7 @@
-import { Component } from 'react';
 import './square.css';
 
-export default class Square extends Component {
+export default function Square(props) {
   render() {
-    return <button className="square">{this.props.value}</button>
+    return <button className="square">{props.value}</button>
   }
 }
