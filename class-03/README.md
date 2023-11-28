@@ -42,43 +42,36 @@ In the last class, you learned how to pass information from a parent component i
   - Step 1. send a function into the child component that updates the state in the parent component
 
   ```javaScript
-  class Parent extends React.Component {
-    constructor(props){
-      super(props);
-      this.state = {
-        name: 'bob'
-      }
+  function Parent() {
+    const [name, setName] = useState('bob);
+
+    function updateName(newName) {
+      setName(newName);
     }
 
-    updateName = (newName) => this.setState({ name: newName });
-
-    render(){
-      return(
-        <Child updateName={this.updateName}>
-      )
-    }
+    return(
+      <Child updateName={updateName}>
+    )
   }
   ```
 
   - Step 2. invoke that function from the props in the child component
   ```javaScript
-  class Child extends React.Component {
-    constructor(props){
-      super(props);
-      this.state={
-        newName:''
-      }
-    }
+  function Child(props) {
+
+    const [childName. setChildName] = useState('');
 
     // this function calls the function that the parent component send us with the new name as an argument
-    updateChildName = () => this.props.updateName(this.state.newName);
+    function updateChildName() {
+      props.updateName(childName);
+    }
 
     render(){
       return(
         <>
-          <form onSubmit={this.updateChildName}>
+          <form onSubmit={updateChildName}>
             <label>What is your new name?</label>
-            <input onChange={() => this.setState({ newName: e.target.value })} />
+            <input onChange={() => setChildName(e.target.value)} />
           </form>
         </>
       )
@@ -86,4 +79,4 @@ In the last class, you learned how to pass information from a parent component i
   }
   ```
 
-  - Step 3. The invoked function from the child component will update the name in the parent component and tada! Your child component has essientially changed the state of your parent component.
+  - Step 3. The invoked function from the child component will update the name in the parent component and tada! Your child component has essentially changed the state of your parent component.
