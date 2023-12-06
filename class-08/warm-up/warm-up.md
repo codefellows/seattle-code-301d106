@@ -17,7 +17,7 @@ function App {
   };
 
   return(
-    <button click={addCount}>Click Me</button>
+    <button click={addCount()}>Click Me</button>
     <p>counter<p>
     <Header title='the best counter app in the world!'>
   );
