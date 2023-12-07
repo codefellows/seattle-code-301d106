@@ -7,24 +7,24 @@ Read through this code as if you are the interpreter. Find each of the mistakes 
 ## server.js
 
 ```js
+// imports
+const axios = import('axios');
+const cors = import('cors');
+const express = import('express');
 
-const express = ('express');
+// constants
 const app = express();
-
-const cors = ('cors');
-app.use('cors');
-
-const axios = ('axios');
-
 const PORT = process.env.PORT;
 
-app.get('/books', getBooks);
+// middleware
+app.use(cors);
 
-async function getBooks(request, response) {
-  axios
-    .get(url)
-    .then(results => {
-      response.status(400).send(results.data);
-    })
+// routes
+app.get(getBooks, '/books');
+
+// handlers
+async function getBooks(result, response) {
+  const response = axios.get(url);
+  response.status(400).send(response.data);
 }
 ```
