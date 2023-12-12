@@ -11,16 +11,15 @@ function Cats({ cats, onDelete }) {
     </ListGroup>
   )
 }
-}
 
 function Cat({ info, onDelete }) {
 
-  function delete () {
+  function deleteCat() {
     onDelete(info);
   }
 
   return (
-    <h3>{info.name} ({info.location}) <span onClick={delete}>[X]</span></h3>
+    <h3>{info.name} ({info.location}) <span onClick={deleteCat}>[X]</span></h3>
   );
 }
 

@@ -9,7 +9,7 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  NavLink, // new
+  NavLink,
 } from "react-router-dom";
 
 const SERVER = import.meta.env.VITE_SERVER_URL;
@@ -42,7 +42,6 @@ function App() {
   function handleLocationSubmit(event) {
     event.preventDefault();
     const location = event.target.location.value;
-    console.log({ location }); // note the use of object destructuring
     fetchCats(location);
   }
 
@@ -50,13 +49,14 @@ function App() {
     const response = await axios.post(API_URL, catInfo);
     const newCat = response.data;
     setCats([...cats, newCat]);
+
   }
 
   async function handleDelete(catToDelete) {
     const url = `${API_URL}/${catToDelete._id}`;
 
     try {
-      const response = await axios.delete(url);
+      await axios.delete(url);
       const filteredCats = cats.filter(cat => cat._id !== catToDelete._id);
       setCats(filteredCats);
     } catch (error) {
@@ -88,7 +88,6 @@ function App() {
           <Route path="/about" element={
             <h1>About Page Here</h1>
           } />
-          {/* new */}
           <Route path="/create" element={
             <CreateCat onCreate={handleCatCreate} />
           } />

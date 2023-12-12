@@ -1,16 +1,21 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
 
 export default function CreateCat({ onCreate }) {
 
-  function handleSubmit(event) => {
+  const navigate = useNavigate();
+
+  async function handleSubmit(event) {
     event.preventDefault();
-    onCreate({
+    await onCreate({
       name: event.target.formName.value,
       color: event.target.formColor.value,
       location: event.target.formLocation.value,
       hasClaws: event.target.formClawsCheckbox.checked,
     })
+    navigate('/');
+
   }
 
   return (
