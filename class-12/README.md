@@ -36,6 +36,8 @@ In this class, we will focus on the `C` and the `D` of the `CRUD`:`CREATE` and `
 ## Helpful Resources
 
 - [mongoose queries](https://mongoosejs.com/docs/api.html#model_Model.findOneAndDelete)
+- [Mongo Atlas](https://www.mongodb.com/atlas/database)
+- [Thunder Client](https://www.thunderclient.com/)
 
 ## Notes
 
