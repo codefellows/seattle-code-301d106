@@ -1,11 +1,16 @@
 const Cat = require('./models/cat');
 
-async function readCats(request, response) {
 
+
+async function readCats(request, response) {
   const filterQuery = {};
 
   if (request.query.location) {
     filterQuery.location = request.query.location;
+  }
+
+  if (request.query.color) {
+    filterQuery.color = request.query.color;
   }
 
   const cats = await Cat.find(filterQuery);
@@ -13,25 +18,18 @@ async function readCats(request, response) {
   response.send(cats);
 }
 
+// createCat
 async function createCat(request, response) {
-
   try {
-
-    // if request.body has everything you need in the right shape
-    // then you can pass it straight to Model
-    // But often you'll need to massage the data a bit
-
-    const newCat = await Cat.create(request.body);
+    const newCat = await Cat.create(request.body); // NOTE: works as is because the request body is the EXACT same shape as cat data
     response.send(newCat);
-
   } catch (error) {
-
     console.error(error);
     response.status(500).send('Error creating cat');
   }
-
 }
 
+// deleteCat
 async function deleteCat(request, response) {
   const id = request.params.id;
 
@@ -42,6 +40,7 @@ async function deleteCat(request, response) {
     console.error(error);
     response.status(404).send(`Unable to delete cat with id ${id}`);
   }
+
 }
 
-module.exports = {readCats, createCat, deleteCat};
+module.exports = { readCats, createCat, deleteCat };
