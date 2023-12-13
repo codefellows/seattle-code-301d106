@@ -1,23 +1,38 @@
 # Warm-Up Exercise
 
-This code sample is written in Python. Read through the code and determine the output for this function.
+This code sample is written in Java. Read through the code and determine the output for this function.
 
-```python
-def search(source: list, key: int) -> int:
-    start = 0
-    end = len(source) - 1
+```java
+import java.util.*;
 
-    while abs(start - end) > 1:
-        mid = abs(start + end) // 2
+public class Count {
+    public static void main(String[] args) {
+        List<Integer> numbers = new ArrayList<>();
+        for (int i = 0; i < 20; i++) {
+            int randomNumber = (int) Math.floor(50 * Math.random());
+            numbers.add(randomNumber);
+        }
+        System.out.println(numbers);
 
-        if key == source[mid]:
-            return mid
+        HashMap<String, Integer> tally = new HashMap<>();
+        tally.put("even", 0);
+        tally.put("odd", 0);
 
-        if key > source[mid]:
-            start = mid + 1
+        for (int i = 0; i < numbers.size(); i++) {
+            String key;
+            int value = numbers.get(i);
+            if (value % 2 == 0) {
+                key = "even";
+            } else {
+                key = "odd";
+            }
 
-        if key < source[mid]:
-            end = mid - 1
+            int votesSoFar = tally.get(key);
+            tally.put(key, votesSoFar + 1);
+        }
 
-    return -1
+        System.out.println("Total even: " + tally.get("even"));
+        System.out.println("Total odd: " + tally.get("odd"));
+    }
+}
 ```
