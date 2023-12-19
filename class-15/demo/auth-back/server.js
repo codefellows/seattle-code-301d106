@@ -28,7 +28,8 @@ app.use(jwtUser);
 const PORT = process.env.PORT || 3000;
 
 app.get('/ping', (req, res) => {
-  res.send('pong - ' + req.user.email);
+  console.log('Hello', req.user.name);
+  res.send('pong');
 });
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
