@@ -24,7 +24,7 @@ function App() {
 
   async function handleRequestClick() {
     try {
-      const response = authRequest('/ping');
+      const response = await authRequest('/ping');
       setRequestResult(response.data);
     } catch (error) {
       setRequestResult(error);
