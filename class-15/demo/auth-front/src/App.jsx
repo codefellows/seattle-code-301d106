@@ -9,18 +9,22 @@ function App() {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [requestResult, setRequestResult] = useState('Requires login');
 
+  async function authRequest(url, method = 'GET') {
+    const accessTokenSilently = await getAccessTokenSilently();
+
+    const config = {
+      headers: { "Authorization": `Bearer ${accessTokenSilently}` },
+      baseURL: import.meta.env.VITE_SERVER_URL,
+      url,
+      method,
+    };
+
+    return await axios(config);
+  }
+
   async function handleRequestClick() {
     try {
-
-      const accessTokenSilently = await getAccessTokenSilently();
-
-      const config = {
-        headers: { "Authorization": `Bearer ${accessTokenSilently}` },
-        baseURL: import.meta.env.VITE_SERVER_URL,
-        url: '/ping',
-      };
-
-      const response = await axios(config);
+      const response = authRequest('/ping');
       setRequestResult(response.data);
     } catch (error) {
       setRequestResult(error);
@@ -29,16 +33,16 @@ function App() {
 
   return (
     <>
-    <AuthButtons />
-    {isAuthenticated && (
-      <div>
-        <h2>Profile</h2>
-        <p>{user.name}</p>
-        <p>{user.email}</p>
-      </div>
-    ) }
-    <button onClick={handleRequestClick}>Ping</button>
-    <p>Ping result: {requestResult}</p>
+      <AuthButtons />
+      {isAuthenticated && (
+        <div>
+          <h2>Profile</h2>
+          <p>{user.name}</p>
+          <p>{user.email}</p>
+        </div>
+      )}
+      <button onClick={handleRequestClick}>Ping</button>
+      <p>Ping result: {requestResult}</p>
     </>
   )
 }
