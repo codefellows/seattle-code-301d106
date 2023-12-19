@@ -22,4 +22,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 
 // npm install @auth0/auth0-react
-// copy main jsx from docs
