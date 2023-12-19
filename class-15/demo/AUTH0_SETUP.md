@@ -18,7 +18,7 @@
  - Note the `Settings` tab.
     - You'll need the values there for your environment.
  - That's it for back-end.
- - See [Auth Back End Demo](../auth-back) for auth in action.
+ - See [Auth Back End Demo](./auth-back) for auth in action.
    - Make sure to update `.env` values with values from `Auth0 Settings`
 
 
@@ -48,5 +48,5 @@
     VITE_AUTH_AUDIENCE
     ```
     - Once at section `Add Login to Your Application` optionall continue reading for reference.
-    - See [Auth Front End Demo](../auth-front) for auth in action.
+    - See [Auth Front End Demo](./auth-front) for auth in action.
     - Make sure to update `.env` values with values from `Auth0 Settings`
